@@ -1,0 +1,5 @@
+.idea/
+*.classpath
+*.project
+Core-Java/.settings/
+Core-Java/target/

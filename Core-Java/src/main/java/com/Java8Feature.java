@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Java8Feature {
 
@@ -29,6 +32,7 @@ public class Java8Feature {
         department2.addEmployee(new Employee("David", 80000));
 
         List<Department> departmentList = Arrays.asList(department1, department2);
+
         Map<String, Employee> map = departmentList.stream().collect(Collectors.toMap(
             Department::getName,
             Java8Feature::getHighestSalaryEmployee
@@ -36,9 +40,17 @@ public class Java8Feature {
 
         map.forEach((dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName()));
 
+        departmentList.stream().collect(
+                Collectors.toMap(
+                    Department::getName, Java8Feature::getHighestSalaryEmployee
+                )).
+            forEach(
+                (dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName())
+            );
+
     }
 
-    private static Employee getHighestSalaryEmployee(Department department) {
+    public static Employee getHighestSalaryEmployee(Department department) {
         return department.getEmployees().stream().max(Comparator.comparingDouble(Employee::getSalary)).orElse(null);
     }
 
@@ -60,6 +72,14 @@ public class Java8Feature {
 
         List<Integer> list = numbers.stream().filter(n -> map.get(n) == 1).collect(Collectors.toList());
         System.out.println("Integer whose count 1: " + list.toString());
+
+        //    get Integer and it's appears count
+        List<Integer> numbers1 = Arrays.asList(1, 2, 3, 2, 4, 1, 5, 3, 6, 4);
+        Map<Integer, Long> map1 = numbers1.stream().collect(Collectors.groupingBy(i -> i, Collectors.counting()));
+        map1.forEach((i, l) -> System.out.println("Integer: " + i + "-> Count: " + l));
+
+        Map<Integer, Long> map2 = map.entrySet().stream().filter(integerLongEntry -> integerLongEntry.getValue() == 1).collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+        map2.forEach((i, l) -> System.out.println("Integer: " + i + "-> Count: " + l));
     }
 
     private static void nonRepeatedFirstChar() {
@@ -71,6 +91,7 @@ public class Java8Feature {
 
         Character character = characterList.stream().filter(c -> characterLongMap.get(c) == 1L).findFirst().orElse(null);
         System.out.println("Non Repeated Char is: " + character);
+
     }
 
 }

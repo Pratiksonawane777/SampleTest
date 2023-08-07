@@ -7,19 +7,42 @@ package com;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Java8Feature {
 
     public static void main(String[] args) {
-        nonRepeatedFirstChar();
+        getNonRepeatedFirstChar();
         getIntAppearsTimeCount();
         getDepartmentWithItHighestEmployeeSal();
+        getCountOfRepeatedChar();
+
+    }
+
+    private static void getCountOfRepeatedChar() {
+        String str = "apple";
+        Map<Character, Long> map = str.chars().mapToObj(c -> (char) c).collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+        map.forEach((key, value) ->
+            System.out.println("Key :" + key + " Value :" + value)
+        );
+
+        Map<Character, Integer> charOccurrencesMap = new HashMap<>();
+        for (Character character : str.toCharArray()) {
+            //            if(charOccurrencesMap.containsKey(character)){
+            //                int count=charOccurrencesMap.get(character)+1;
+            //                charOccurrencesMap.put(character,count);
+            //            }else{
+            //                charOccurrencesMap.put(character,1);
+            //            }
+            charOccurrencesMap.put(character, charOccurrencesMap.getOrDefault(character, 0) + 1);
+        }
+        charOccurrencesMap.forEach((key, value) ->
+            System.out.println("Key :" + key + " Value :" + value)
+        );
     }
 
     private static void getDepartmentWithItHighestEmployeeSal() {
@@ -42,7 +65,8 @@ public class Java8Feature {
 
         departmentList.stream().collect(
                 Collectors.toMap(
-                    Department::getName, Java8Feature::getHighestSalaryEmployee
+                    Department::getName,
+                    Java8Feature::getHighestSalaryEmployee
                 )).
             forEach(
                 (dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName())
@@ -51,7 +75,10 @@ public class Java8Feature {
     }
 
     public static Employee getHighestSalaryEmployee(Department department) {
-        return department.getEmployees().stream().max(Comparator.comparingDouble(Employee::getSalary)).orElse(null);
+
+        return department.getEmployees().stream()
+            .max(Comparator.comparingDouble(Employee::getSalary))
+            .orElse(null);
     }
 
     private static void getIntAppearsTimeCount() {
@@ -82,7 +109,7 @@ public class Java8Feature {
         map2.forEach((i, l) -> System.out.println("Integer: " + i + "-> Count: " + l));
     }
 
-    private static void nonRepeatedFirstChar() {
+    private static void getNonRepeatedFirstChar() {
         //        find out the first non-repeated character in it using Stream functions
         String str = "java is a programming language";
 

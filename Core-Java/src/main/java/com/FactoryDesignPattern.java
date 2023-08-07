@@ -39,6 +39,6 @@ public class FactoryDesignPattern {
         Product productA = ProductFactory.createProduct("A");
         productA.doSomething();
         Product productB = ProductFactory.createProduct("B");
-        productA.doSomething();
+        productB.doSomething();
     }
 }

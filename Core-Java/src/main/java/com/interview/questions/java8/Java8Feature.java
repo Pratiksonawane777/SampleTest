@@ -4,7 +4,6 @@
 
 package com.interview.questions.java8;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,9 +17,7 @@ public class Java8Feature {
     public static void main(String[] args) {
         getNonRepeatedFirstChar();
         getIntAppearsTimeCount();
-        getDepartmentWithItHighestEmployeeSal();
         getCountOfRepeatedChar();
-
     }
 
     private static void getCountOfRepeatedChar() {
@@ -45,34 +42,7 @@ public class Java8Feature {
         );
     }
 
-    private static void getDepartmentWithItHighestEmployeeSal() {
-        Department department1 = new Department("HR");
-        department1.addEmployee(new Employee("Alice", 50000,"HR"));
-        department1.addEmployee(new Employee("Bob", 60000,"IT"));
 
-        Department department2 = new Department("Engineering");
-        department2.addEmployee(new Employee("Charlie", 70000,"IT"));
-        department2.addEmployee(new Employee("David", 80000,"HR"));
-
-        List<Department> departmentList = Arrays.asList(department1, department2);
-
-        Map<String, Employee> map = departmentList.stream().collect(Collectors.toMap(
-            Department::getName,
-            Java8Feature::getHighestSalaryEmployee
-        ));
-
-        map.forEach((dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName()));
-
-        departmentList.stream().collect(
-                Collectors.toMap(
-                    Department::getName,
-                    Java8Feature::getHighestSalaryEmployee
-                )).
-            forEach(
-                (dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName())
-            );
-
-    }
 
     public static Employee getHighestSalaryEmployee(Department department) {
 
@@ -123,53 +93,5 @@ public class Java8Feature {
 
 }
 
-class Employee {
 
-    private String name;
-    private double salary;
-
-    private String department;
-
-    public Employee(String name, double salary, String department) {
-        this.name = name;
-        this.salary = salary;
-        this.department = department;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-}
-
-class Department {
-
-    private String name;
-    private List<Employee> employees;
-
-    public Department(String name) {
-        this.name = name;
-        this.employees = new ArrayList<>();
-    }
-
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-}
 

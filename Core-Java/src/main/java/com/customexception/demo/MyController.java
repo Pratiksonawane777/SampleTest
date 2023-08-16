@@ -2,7 +2,7 @@
 //  * Copyright (c) CRIF - All Right Reserved *
 //  *******************************************
 
-package com.pratik.test;
+package com.customexception.demo;
 
 //@RestController
 public class MyController {

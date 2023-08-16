@@ -2,7 +2,7 @@
 //  * Copyright (c) CRIF - All Right Reserved *
 //  *******************************************
 
-package com;
+package com.designpatterns.demo;
 
 class Products{
     String Attribute1;

@@ -2,7 +2,7 @@
 //  * Copyright (c) CRIF - All Right Reserved *
 //  *******************************************
 
-package com;
+package com.interview.questions.java8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,12 +47,12 @@ public class Java8Feature {
 
     private static void getDepartmentWithItHighestEmployeeSal() {
         Department department1 = new Department("HR");
-        department1.addEmployee(new Employee("Alice", 50000));
-        department1.addEmployee(new Employee("Bob", 60000));
+        department1.addEmployee(new Employee("Alice", 50000,"HR"));
+        department1.addEmployee(new Employee("Bob", 60000,"IT"));
 
         Department department2 = new Department("Engineering");
-        department2.addEmployee(new Employee("Charlie", 70000));
-        department2.addEmployee(new Employee("David", 80000));
+        department2.addEmployee(new Employee("Charlie", 70000,"IT"));
+        department2.addEmployee(new Employee("David", 80000,"HR"));
 
         List<Department> departmentList = Arrays.asList(department1, department2);
 
@@ -128,9 +128,12 @@ class Employee {
     private String name;
     private double salary;
 
-    public Employee(String name, double salary) {
+    private String department;
+
+    public Employee(String name, double salary, String department) {
         this.name = name;
         this.salary = salary;
+        this.department = department;
     }
 
     public String getName() {
@@ -139,6 +142,10 @@ class Employee {
 
     public double getSalary() {
         return salary;
+    }
+
+    public String getDepartment() {
+        return department;
     }
 }
 
@@ -163,5 +170,6 @@ class Department {
     public String getName() {
         return name;
     }
+
 }
 

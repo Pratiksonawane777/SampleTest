@@ -5,6 +5,7 @@
 package com.interview.questions.java8;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class Java8Stream {
 
         Map<String, Employee> map = departmentList.stream().collect(Collectors.toMap(
             Department::getName,
-            Java8Feature::getHighestSalaryEmployee
+            Java8Stream::getHighestSalaryEmployee
         ));
 
         map.forEach((dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName()));
@@ -58,12 +59,19 @@ public class Java8Stream {
         departmentList.stream().collect(
                 Collectors.toMap(
                     Department::getName,
-                    Java8Feature::getHighestSalaryEmployee
+                    Java8Stream::getHighestSalaryEmployee
                 )).
             forEach(
                 (dept, emp) -> System.out.println("Department : " + dept + " Employee: " + emp.getName())
             );
 
+    }
+
+    public static Employee getHighestSalaryEmployee(Department department) {
+
+        return department.getEmployees().stream()
+            .max(Comparator.comparingDouble(Employee::getSalary))
+            .orElse(null);
     }
 }
 

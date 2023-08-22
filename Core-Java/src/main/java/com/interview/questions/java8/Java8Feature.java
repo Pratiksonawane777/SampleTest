@@ -42,15 +42,6 @@ public class Java8Feature {
         );
     }
 
-
-
-    public static Employee getHighestSalaryEmployee(Department department) {
-
-        return department.getEmployees().stream()
-            .max(Comparator.comparingDouble(Employee::getSalary))
-            .orElse(null);
-    }
-
     private static void getIntAppearsTimeCount() {
         //get Integer and it's appears count
         List<Integer> numbers = Arrays.asList(1, 2, 3, 2, 4, 1, 5, 3, 6, 4);

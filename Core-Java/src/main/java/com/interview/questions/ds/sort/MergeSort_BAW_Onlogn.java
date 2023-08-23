@@ -6,7 +6,7 @@ package com.interview.questions.ds.sort;
 
 import java.util.Arrays;
 
-public class MergeSort {
+public class MergeSort_BAW_Onlogn {
 
     //    time complexity: O(n log n)
     public static void main(String[] args) {

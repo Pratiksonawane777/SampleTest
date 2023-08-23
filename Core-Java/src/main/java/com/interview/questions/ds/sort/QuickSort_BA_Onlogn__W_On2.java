@@ -6,7 +6,7 @@ package com.interview.questions.ds.sort;
 
 import java.util.Arrays;
 
-public class QuickSort {
+public class QuickSort_BA_Onlogn__W_On2 {
 //    Average-case time complexity: O(n log n)
 //    Worst-case time complexity: O(n^2) (although with good partitioning strategies, this is rarely encountered)
 //    Best-case time complexity: O(n log n)

@@ -6,7 +6,7 @@ package com.interview.questions.ds.sort;
 
 import java.util.Arrays;
 
-public class BubbleSort {
+public class BubbleSort_BAW_On2 {
     //time complexity: O(n^2)
     public static void main(String[] args) {
         int[] arr = { 1, 4, 7, 9, 2, 3, 1, 9, 2 };

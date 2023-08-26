@@ -4,20 +4,64 @@
 
 package com.interview.questions.java8;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Java8Feature {
 
     public static void main(String[] args) {
         getNonRepeatedFirstChar();
+        firstNonRepeatingLetterWithCaseInSensitive();
         getIntAppearsTimeCount();
         getCountOfRepeatedChar();
+        getIntValueRepeatedWithSameCount();
+
+    }
+
+    private static void getIntValueRepeatedWithSameCount() {
+        //        int[] A = { 5, 5, 5, 5, 5 };
+        //        int[] A = { 2, 5, 5, 5, 2 };
+        int[] A = { 2, 3, 3, 3, 2 };
+        Map<Integer, Integer> integerMap = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < A.length; i++) {
+            list.add(A[i]);
+            integerMap.put(A[i], integerMap.getOrDefault(A[i], 0) + 1);
+        }
+        int resultKey = 0;
+        int resultValue = 0;
+
+        //One Way
+        for (Entry<Integer, Integer> entry : integerMap.entrySet()) {
+            if (entry.getValue().equals(entry.getKey()) && entry.getKey() > resultKey) {
+                resultKey = entry.getKey();
+                resultValue = entry.getKey();
+            }
+        }
+        System.out.println("Result : key " + resultKey + "  & Value :" + resultValue);
+
+        resultKey = 0;
+        resultValue = 0;
+
+        //Second Way
+        Map<Integer, Long> mapOfCount = list.stream().collect(Collectors.groupingBy(i -> i, Collectors.counting()));
+        for (Entry<Integer, Long> entry : mapOfCount.entrySet()) {
+            if (entry.getValue().equals((long) entry.getKey()) && entry.getKey() > resultKey) {
+                resultKey = entry.getKey();
+                resultValue = entry.getKey();
+            }
+        }
+
+        System.out.println("Result : key " + resultKey + "  & Value :" + resultValue);
+
     }
 
     private static void getCountOfRepeatedChar() {
@@ -80,6 +124,19 @@ public class Java8Feature {
         Character character = characterList.stream().filter(c -> characterLongMap.get(c) == 1L).findFirst().orElse(null);
         System.out.println("Non Repeated Char is: " + character);
 
+    }
+
+    public static void firstNonRepeatingLetterWithCaseInSensitive() {
+        String str = "Stress";
+        Map<Character, Long> map = str.chars().
+            mapToObj(c -> (char) c).
+            collect(Collectors.groupingBy(Character::toLowerCase, Collectors.counting()));
+
+        Optional<Character> list = str.chars().
+            mapToObj(c -> (char) c).
+            filter(c -> map.get(Character.toLowerCase(c)) == 1L).
+            findFirst();
+        System.out.println("Non Repeated Char is: " + list.map(Object::toString).orElse(""));
     }
 
 }

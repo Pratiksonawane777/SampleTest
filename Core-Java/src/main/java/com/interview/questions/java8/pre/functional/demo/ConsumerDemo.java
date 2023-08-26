@@ -2,7 +2,7 @@
 //  * Copyright (c) CRIF - All Right Reserved *
 //  *******************************************
 
-package com.interview.questions.pre.functional.demo;
+package com.interview.questions.java8.pre.functional.demo;
 
 import java.util.Arrays;
 import java.util.List;

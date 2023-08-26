@@ -2,12 +2,11 @@
 //  * Copyright (c) CRIF - All Right Reserved *
 //  *******************************************
 
-package com.interview.questions.pre.functional.demo;
+package com.interview.questions.java8.pre.functional.demo;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class PredicateDemo
 //    implements Predicate<Integer>

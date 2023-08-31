@@ -15,15 +15,33 @@ public class Java8Stream {
     public static void main(String[] args) {
         getEmployeeListWhosSameDept();
         getDepartmentWithItHighestEmployeeSal();
+        getFemaleEmployeeAvgSalary();
     }
+
+    private static void getFemaleEmployeeAvgSalary() {
+        List<Employee> employees = Arrays.asList(
+            new Employee("Alice", 51000, "female", "HR"),
+            new Employee("Bob", 60000, "male", "IT"),
+            new Employee("Carol", 55000, "female", "IT"),
+            new Employee("David", 62000, "male", "HR"),
+            new Employee("Eve", 52000, "female", "Finance")
+        );
+
+        double averageFemaleSalary = employees.stream().filter(e -> e.getGender().equals("female")).mapToDouble(Employee::getSalary).average().orElse(0);
+        double averageMaleSalary = employees.stream().filter(e -> e.getGender().equals("male")).mapToDouble(Employee::getSalary).average().orElse(0);
+        System.out.println("averageFemaleSalary = " + averageFemaleSalary);
+        System.out.println("averageMaleSalary = " + averageMaleSalary);
+
+    }
+
     private static void getEmployeeListWhosSameDept() {
         List<Employee> employees = Arrays.asList(
-            new Employee("Alice", 1, "HR"),
-            new Employee("Bob", 2, "IT"),
-            new Employee("Carol", 3, "IT"),
-            new Employee("David", 4, "HR"),
-            new Employee("Eve", 5, "Finance"),
-            new Employee("Frank", 6, "IT")
+            new Employee("Alice", 1, "female", "HR"),
+            new Employee("Bob", 2, "male", "IT"),
+            new Employee("Carol", 3, "female", "IT"),
+            new Employee("David", 4, "male", "HR"),
+            new Employee("Eve", 5, "female", "Finance"),
+            new Employee("Frank", 6, "male", "IT")
         );
 
         Map<String, List<Employee>> employeesByDepartment = employees.stream()
@@ -31,7 +49,7 @@ public class Java8Stream {
 
         // Filter and print employees with the same department
         employeesByDepartment.values().stream()
-//            .filter(employeeList -> employeeList.size() > 1)
+            //            .filter(employeeList -> employeeList.size() > 1)
             .forEach(employeeList -> {
                 System.out.println("Employees in department " + employeeList.get(0).getDepartment() + ":");
                 employeeList.forEach(employee -> System.out.println(" - " + employee.getName()));
@@ -40,12 +58,12 @@ public class Java8Stream {
 
     private static void getDepartmentWithItHighestEmployeeSal() {
         Department department1 = new Department("HR");
-        department1.addEmployee(new Employee("Alice", 50000,"HR"));
-        department1.addEmployee(new Employee("Bob", 60000,"IT"));
+        department1.addEmployee(new Employee("Alice", 50000, "female", "HR"));
+        department1.addEmployee(new Employee("Bob", 60000, "male", "IT"));
 
         Department department2 = new Department("Engineering");
-        department2.addEmployee(new Employee("Charlie", 70000,"IT"));
-        department2.addEmployee(new Employee("David", 80000,"HR"));
+        department2.addEmployee(new Employee("Charlie", 70000, "male", "IT"));
+        department2.addEmployee(new Employee("David", 80000, "male", "HR"));
 
         List<Department> departmentList = Arrays.asList(department1, department2);
 

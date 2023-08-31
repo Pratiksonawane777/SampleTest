@@ -8,12 +8,14 @@ class Employee {
 
     private String name;
     private double salary;
+    private String gender;
 
     private String department;
 
-    public Employee(String name, double salary, String department) {
+    public Employee(String name, double salary, String gender, String department) {
         this.name = name;
         this.salary = salary;
+        this.gender = gender;
         this.department = department;
     }
 
@@ -27,5 +29,9 @@ class Employee {
 
     public String getDepartment() {
         return department;
+    }
+
+    public String getGender() {
+        return gender;
     }
 }

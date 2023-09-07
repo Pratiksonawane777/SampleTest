@@ -81,7 +81,7 @@ class ProductsDecorator{
         return procuctBuilder.getResult();
     }
 }
-public class BuilderDesignPattern {
+public class BuilderPattern {
 
     public static void main(String[] args) {
         ProcuctBuilder procuctBuilder=new ConcreteProcuctBuilder();

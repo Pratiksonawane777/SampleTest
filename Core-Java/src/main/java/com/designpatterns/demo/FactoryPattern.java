@@ -33,7 +33,7 @@ class ProductFactory {
 }
 
 
-public class FactoryDesignPattern {
+public class FactoryPattern {
 
     public static void main(String[] args) {
         Product productA = ProductFactory.createProduct("A");

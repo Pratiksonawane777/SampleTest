@@ -31,7 +31,7 @@ class Adapter implements Target {
 }
 
 // Client Code
-public class AddapterDesignPattern {
+public class AddapterPattern {
     public static void main(String[] args) {
         Adaptee adaptee = new Adaptee();
         Target target = new Adapter(adaptee);

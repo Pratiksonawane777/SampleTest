@@ -4,7 +4,9 @@
 
 package com.interview.questions.java8;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,24 @@ public class Java8Stream {
         getEmployeeListWhosSameDept();
         getDepartmentWithItHighestEmployeeSal();
         getFemaleEmployeeAvgSalary();
+        getEmployeeSortingNameASCNdSalDESC();
+    }
+
+    private static void getEmployeeSortingNameASCNdSalDESC() {
+        List<Employee> employeeList = Arrays.asList(
+            new Employee("Alice", 51000, "female", "HR"),
+            new Employee("Alice", 52000, "female", "HR"),
+            new Employee("Bob", 60000, "male", "IT"),
+            new Employee("Carol", 55000, "female", "IT"),
+            new Employee("David", 62000, "male", "HR"),
+            new Employee("Eve", 54000, "female", "Finance")
+        );
+        // Sort the list by name in ascending order and age in descending order
+        Collections.sort(employeeList, Comparator.comparing(Employee::getName).thenComparing(Employee::getSalary, Comparator.reverseOrder()));
+        // Print the sorted list
+        for (Employee employee : employeeList) {
+            System.out.println(employee.getName() + "-" + employee.getSalary());
+        }
     }
 
     private static void getFemaleEmployeeAvgSalary() {

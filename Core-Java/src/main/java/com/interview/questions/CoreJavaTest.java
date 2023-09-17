@@ -31,6 +31,7 @@ class Second extends first {
     }
 
 //    @Override
-//    void compileTime() throws IOException {
+//    void compileTime() {
+//        throw new IOException();
 //    }
 }

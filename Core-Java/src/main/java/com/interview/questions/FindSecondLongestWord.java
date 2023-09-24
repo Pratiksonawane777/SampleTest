@@ -2,8 +2,10 @@ package com.interview.questions;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 
 public class FindSecondLongestWord {
+
     public static void main(String[] args) {
         String str = "I am a good programmer";
         String[] words = str.split(" ");
@@ -31,5 +33,15 @@ public class FindSecondLongestWord {
             .orElse(null);
 
         System.out.println("Second Longest Word: " + secondLongestWord2);
+
+        Optional<String> maxString = Arrays.stream(words)
+            .max((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+
+        if (maxString.isPresent()) {
+            System.out.println("Max String: " + maxString.get());
+        } else {
+            System.out.println("Array is empty.");
+        }
+
     }
 }
